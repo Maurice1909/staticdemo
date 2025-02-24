@@ -19,13 +19,13 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Step 3: Upload files to Blob Storage using inlineScript
+      # Step 3: Upload files to Blob Storage
       - name: Upload to Blob Storage
         uses: azure/CLI@v1
         with:
           inlineScript: |
             az storage blob upload-batch \
               --account-name 'staticwebsite21' \
-              --container-name '$web' \
+              --destination '$web' \
               --source './' \
               --overwrite true
