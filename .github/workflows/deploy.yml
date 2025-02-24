@@ -28,4 +28,5 @@ jobs:
               --account-name 'staticwebsite21' \
               --destination '$web' \
               --source './' \
-              --overwrite true
+              --overwrite true \
+              --auth-mode login
