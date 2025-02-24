@@ -8,26 +8,24 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Checkout repository code
       - uses: actions/checkout@v3
 
+      # Step 2: Login to Azure
       - name: Azure Login
         uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      # Step 3: Upload files to Blob Storage using inlineScript
       - name: Upload to Blob Storage
         uses: azure/CLI@v1
         with:
-          azcli-script: |
+          inlineScript: |
             az storage blob upload-batch \
-              --account-name <your_storage_account_name> \
+              --account-name 'staticwebsite21' \
               --container-name '$web' \
               --source './' \
               --overwrite true
-
-      # Alternative using 'azcopy'
-      # - name: azcopy
-      #   uses: azure/CLI@v1
-      #   with:
-      #     azcli-script: 
